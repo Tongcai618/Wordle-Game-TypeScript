@@ -1,8 +1,25 @@
 .game {
     display: flex;
+    justify-content: center;
+    padding: 32px 16px;
+    background: #f1f2f3;        /* page background (optional) */
+  }
+
+/* panel that contains board + keyboard */
+.panel {
+    background: #ffffff;
+    /* ← set your panel color here */
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .05);
+    border-radius: 8px;
+    padding: 24px 24px 16px;
+    width: 720px;
+    /* match your layout */
+    display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 50px;
+    gap: 12px;
+    /* space between board and keyboard */
 }
 
 .game-board {
@@ -24,24 +41,28 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background: #fff;
     font-size: 24px;
-    font-weight: bold;
-    background-color: white;
+    font-weight: 700;
+    text-transform: uppercase;
 }
 
 .grid.grey {
-    background-color: #888;
-    color: white;
-}
-
-.grid.green {
-    background-color: green;
-    color: white;
+    background-color: #cccccc;
+    color: #fff;
+    border-color: #cccccc;
 }
 
 .grid.yellow {
-    background-color: gold;
-    color: black;
+    background-color: #ffeb3b;
+    color: #111;
+    border-color: #ffeb3b;
+}
+
+.grid.green {
+    background-color: #4caf50;
+    color: #fff;
+    border-color: #4caf50;
 }
 
 .key-row {
@@ -55,6 +76,12 @@
     height: 50px;
     margin: 2px;
     font-size: 18px;
+    background-color: #eeecec;
+    color: black;
+    /* center the letter */
+    display: flex;
+    align-items: center;   /* vertical */
+    justify-content: center; /* horizontal */
 }
 
 .enter-key,
@@ -64,6 +91,8 @@
 
 .refresh {
     margin-top: 20px;
+    background-color: #eeecec;
+    color: black;
 }
 
 /* Game.module.css */

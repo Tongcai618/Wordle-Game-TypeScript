@@ -6,6 +6,7 @@ import Game from "./pages/Game";
 import { GameProvider } from "./contexts/GameContext";
 import { TokenProvider } from "./contexts/TokenContext";
 import './App.css';
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/game" element={<Game />} />
+          <Route path="/me"element={<Profile />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </GameProvider>

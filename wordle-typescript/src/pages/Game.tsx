@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { FaBackspace } from "react-icons/fa";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSyncAlt } from "@fortawesome/free-solid-svg-icons";
@@ -134,7 +134,7 @@ export const Game: React.FC = () => {
     const [colors, setColors] = useState<Record<string, string | null>>({});
 
 
-    const { gameId, game, startGame, refreshGame, submitGuess, loading } = useGame();
+    const { gameId, game, startGame, refreshGame, submitGuess } = useGame();
 
     useEffect(() => {
         if (!gameId) startGame();
@@ -149,6 +149,8 @@ export const Game: React.FC = () => {
 
     const handleKey = (letter: string) => {
         if (currentWord.length >= 5) return;
+
+        if (game?.finished) return;
 
         const newWord = currentWord + letter.toUpperCase();
         setCurrentWord(newWord);
@@ -254,14 +256,17 @@ export const Game: React.FC = () => {
             {/* <Header /> */}
             <Header />
             <div className={styles.game}>
-                <div className={styles["game-board"]}>
-                    <Board history={history} />
-                    <button className={styles.refresh} onClick={resetGame}>
-                        <FontAwesomeIcon icon={faSyncAlt} />
-                    </button>
-                </div>
-                <div className={styles["game-keyboard"]}>
-                    <Keyboard onPlay={handleKey} handleCancel={handleCancel} handleEnter={handleEnter} colors={colors} />
+                {/* NEW panel wraps board + keyboard */}
+                <div className={styles.panel}>
+                    <div className={styles["game-board"]}>
+                        <Board history={history} />
+                        <button className={styles.refresh} onClick={resetGame}>
+                            <FontAwesomeIcon icon={faSyncAlt} />
+                        </button>
+                    </div>
+                    <div className={styles["game-keyboard"]}>
+                        <Keyboard onPlay={handleKey} handleCancel={handleCancel} handleEnter={handleEnter} colors={colors} />
+                    </div>
                 </div>
             </div>
         </>
