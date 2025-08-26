@@ -29,7 +29,7 @@ export const submitGuess = async (
 ): Promise<GuessOutcome> => {
   const response = await http.post<{ Result: GuessOutcome }>(
     "/wordle/games/guess",
-    null, // No request body
+    null,
     {
       params: { id, guess },
     }

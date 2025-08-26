@@ -21,7 +21,6 @@ export default function Login() {
 
         try {
             const res: AuthResponse = await login(data);
-            alert("Log in successfully!");
             storeToken(res.token);
             console.log(res.token);
             navigate("/game")

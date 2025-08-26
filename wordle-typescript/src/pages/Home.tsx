@@ -1,35 +1,25 @@
 import { useNavigate } from 'react-router-dom';
-import reactLogo from '../assets/react.svg';
-import viteLogo from '/vite.svg';
 import '../App.css';
+import './Home.css'; // we'll define this below
 
 export default function Home() {
   const navigate = useNavigate();
 
-  const goToLogin = () => {
-    navigate("/login");
-  };
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={goToLogin}>Go to Login Page</button>
-        <p>
-          Edit <code>src/pages/Home.tsx</code> and save to test HMR
+    <div className="home">
+      <div className="home-panel">
+        <h1 className="home-title">Welcome to Wordle Game!</h1>
+        <p className="home-subtitle">
+          Guess the word in 6 tries. Test your vocabulary and have fun!
+        </p>
+        <div className="home-buttons">
+          <button onClick={() => navigate('/login')}>Login</button>
+          <button onClick={() => navigate('/signup')}>Sign Up</button>
+        </div>
+        <p className="home-footer">
+          Built with React + Spring Boot
         </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   );
 }

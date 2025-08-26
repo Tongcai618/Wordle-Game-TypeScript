@@ -17,6 +17,7 @@ export interface GuessOutcome {
   finished: boolean;
   history: GuessResult[];
   keyboardColors: Record<string, string | null>; 
+  finishedAt?: string;
 }
 
 export interface Game {

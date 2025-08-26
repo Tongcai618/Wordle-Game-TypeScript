@@ -32,7 +32,6 @@ export default function Signup() {
             const res: AuthResponse = await signup(data);
             // optionally save token
             // localStorage.setItem("token", res.token);
-            alert("Account created successfully!");
             storeToken(res.token);
             console.log(res.token);
             navigate("/game");

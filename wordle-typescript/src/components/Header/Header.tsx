@@ -23,7 +23,7 @@ export const Header: React.FC = () => {
             <img src={wordleLogo} alt="Wordle Logo" className={styles.logo} />
             <a href="/game" className={styles.username}> Wordle Game</a>
             <nav className={styles.navigation}>
-                <a href="#about">About</a>
+                <a href="/about">About</a>
                 <a href="#contact">Contact</a>
                 {isAuthenticated && username ? (
                     <a href="/me" className={styles.username}>
