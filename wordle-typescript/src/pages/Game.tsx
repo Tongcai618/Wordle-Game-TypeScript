@@ -9,6 +9,7 @@ import { mapFeedbackToColors, mergeKeyboardColors } from "../utils/keyboardColor
 import { Board } from "../components/Board/Board";
 import { Keyboard } from "../components/Keyboard/Keyboard";
 import { usePhysicalKeyboard } from "../hooks/usePhysicalKeyboard";
+import { Toast } from "../components/Toast/Toast";
 
 
 // Main Game Component
@@ -16,12 +17,10 @@ export const Game: React.FC = () => {
     const [history, setHistory] = useState<GuessResult[]>(
         Array(6).fill({ guess: "", feedback: [] })
     );
-
     const [currentWord, setCurrentWord] = useState("");
     const [colors, setColors] = useState<Record<string, string | null>>({});
-
-
     const { gameId, game, startGame, refreshGame, submitGuess } = useGame();
+    const [toastMsg, setToastMsg] = useState<string | null>(null);
 
     useEffect(() => {
         if (!gameId) startGame();
@@ -78,6 +77,11 @@ export const Game: React.FC = () => {
                 setColors(prev => mergeKeyboardColors(prev, mapFeedbackToColors(res.guess, res.feedback)));
                 // Clear the current word for the next input
                 setCurrentWord("");
+
+                // if the answer is correct
+                if (res.correct) {
+                    setToastMsg(`🎉 You solved it: ${res.guess}!`);
+                }
             }
         } catch (err) {
             console.error("Failed to submit guess:", err);
@@ -109,7 +113,7 @@ export const Game: React.FC = () => {
         onEnter: handleEnter,
         onBackspace: handleCancel,
         disabled: game?.finished,
-      });
+    });
 
     // Reset the game
     const resetGame = async () => {
@@ -118,6 +122,7 @@ export const Game: React.FC = () => {
         setHistory(Array(6).fill({ guess: "", feedback: [] }));
         setCurrentWord("");
         setColors({});
+        setToastMsg(null);
 
         console.log("Refreshed the game.")
     };
@@ -139,6 +144,15 @@ export const Game: React.FC = () => {
                         <Keyboard onPlay={handleKey} handleCancel={handleCancel} handleEnter={handleEnter} colors={colors} />
                     </div>
                 </div>
+
+                {/*The Toast message when the answer is correct*/}
+                {toastMsg && (
+                    <Toast
+                        message={toastMsg}
+                        onClose={() => setToastMsg(null)}
+                        duration={60000} // 1 minutes
+                    />
+                )}
             </div>
         </>
     );

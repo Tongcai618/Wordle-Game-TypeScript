@@ -24,7 +24,7 @@ export const Header: React.FC = () => {
             <a href="/game" className={styles.username}> Wordle Game</a>
             <nav className={styles.navigation}>
                 <a href="/about">About</a>
-                <a href="#contact">Contact</a>
+                <a href="/contact">Contact</a>
                 {isAuthenticated && username ? (
                     <a href="/me" className={styles.username}>
                         {username}
