@@ -5,7 +5,6 @@ interface EnterKeyProps {
     onEnterClick: () => void;
 }
 
-
 export const EnterKey: React.FC<EnterKeyProps> = ({ onEnterClick }) => (
     <button className={`${styles.key} ${styles["enter-key"]}`} onClick={onEnterClick}>
         ✓

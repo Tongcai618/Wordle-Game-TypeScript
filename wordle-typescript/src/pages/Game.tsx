@@ -8,6 +8,7 @@ import type { GuessResult } from "../types/game";
 import { mapFeedbackToColors, mergeKeyboardColors } from "../utils/keyboardColors";
 import { Board } from "../components/Board/Board";
 import { Keyboard } from "../components/Keyboard/Keyboard";
+import { usePhysicalKeyboard } from "../hooks/usePhysicalKeyboard";
 
 
 // Main Game Component
@@ -52,8 +53,6 @@ export const Game: React.FC = () => {
 
         setHistory(newHistory);
     };
-
-
     const handleEnter = async () => {
         if (currentWord.length !== 5) {
             alert("Please enter a 5-letter word.");
@@ -84,7 +83,6 @@ export const Game: React.FC = () => {
             console.error("Failed to submit guess:", err);
         }
     };
-
     const handleCancel = () => {
         if (currentWord.length === 0) return;
 
@@ -104,6 +102,14 @@ export const Game: React.FC = () => {
 
         setHistory(newHistory);
     };
+
+    // Listen to physical keyboard to input
+    usePhysicalKeyboard({
+        onLetter: handleKey,
+        onEnter: handleEnter,
+        onBackspace: handleCancel,
+        disabled: game?.finished,
+      });
 
     // Reset the game
     const resetGame = async () => {
