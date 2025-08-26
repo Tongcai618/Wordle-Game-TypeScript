@@ -1,85 +1,105 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Signup.module.css";
+import type { AuthResponse, SignupRequest } from "../types/auth";
+import { signup } from "../apis/auth";
+import { useToken } from "../contexts/TokenContext";
 
 export default function Signup() {
-  const [username, setUsername] = useState(""); // 👈 new
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirm, setConfirm] = useState("");
-  const navigate = useNavigate();
+    const {storeToken} = useToken();
+    const [username, setUsername] = useState(""); // 👈 new
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirm, setConfirm] = useState("");
+    const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
 
-    if (password !== confirm) {
-      alert("Passwords do not match");
-      return;
-    }
+        if (password !== confirm) {
+            alert("Passwords do not match");
+            return;
+        }
 
-    // Simulate signup logic
-    console.log("Signup:", { username, email, password });
-    navigate("/login");
-  };
+        const data: SignupRequest = {
+            username,
+            email,
+            password,
+        };
 
-  return (
-    <div className={styles.pageContainer}>
-      <div className={styles.leftPane}>
-        <h1>Join Us 🚀</h1>
-        <p>Create your account and start exploring our platform today.</p>
-      </div>
-      <div className={styles.rightPane}>
-        <form className={styles.signupCard} onSubmit={handleSubmit}>
-          <h2 className={styles.title}>Sign Up</h2>
+        // sign up logic
+        try {
+            const res: AuthResponse = await signup(data);
+            // optionally save token
+            // localStorage.setItem("token", res.token);
+            alert("Account created successfully!");
+            storeToken(res.token);
+            console.log(res.token);
+            navigate("/game");
+        } catch (error: any) {
+            console.error("Signup failed:", error);
+            alert(error?.response?.data?.message || "Signup failed.");
+        }
+    };
 
-          <input
-            type="text"
-            placeholder="Username"
-            className={styles.input}
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
+    return (
+        <div className={styles.pageContainer}>
+            <div className={styles.leftPane}>
+                <h1>Join Us 🚀</h1>
+                <p>Create your account and start exploring our platform today.</p>
+            </div>
+            <div className={styles.rightPane}>
+                <form className={styles.signupCard} onSubmit={handleSubmit}>
+                    <h2 className={styles.title}>Sign Up</h2>
 
-          <input
-            type="email"
-            placeholder="Email"
-            className={styles.input}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+                    <input
+                        type="text"
+                        placeholder="Username"
+                        className={styles.input}
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        required
+                    />
 
-          <input
-            type="password"
-            placeholder="Password"
-            className={styles.input}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        className={styles.input}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
 
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            className={styles.input}
-            value={confirm}
-            onChange={(e) => setConfirm(e.target.value)}
-            required
-          />
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        className={styles.input}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
 
-          <button className={styles.button} type="submit">
-            Create Account
-          </button>
+                    <input
+                        type="password"
+                        placeholder="Confirm Password"
+                        className={styles.input}
+                        value={confirm}
+                        onChange={(e) => setConfirm(e.target.value)}
+                        required
+                    />
 
-          <p className={styles.footerText}>
-            Already have an account?{" "}
-            <a href="/login" className={styles.link}>
-              Login
-            </a>
-          </p>
-        </form>
-      </div>
-    </div>
-  );
+                    <button className={styles.button} type="submit">
+                        Create Account
+                    </button>
+
+                    <p className={styles.footerText}>
+                        Already have an account?{" "}
+                        <a href="/login" className={styles.link}>
+                            Login
+                        </a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    );
 }

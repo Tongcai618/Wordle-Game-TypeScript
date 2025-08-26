@@ -14,42 +14,135 @@ html, body {
   color: #1a202c;
 }
 
-#root {
-  height: 100%;
+/* General styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  text-align: center;
+}
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #427070;
+  color: white;
 }
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  width: 50px;
+  height: 50px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.navigation a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+.navigation a:hover {
+  text-decoration: underline;
+}
+
+
+.game {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+}
+
+/* Board and Grid styles */
+
+.board-row {
+  display: flex;
+  justify-content: center;
+  margin: 5px 0;
+}
+
+.grid {
+  width: 50px;
+  height: 50px;
+  border: 2px solid #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 2px;
+  transition: background-color 0.3s;
+}
+
+@keyframes blink {
+  0%, 100% {
+      opacity: 1;
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+      opacity: 0;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.grid.blink-once{
+  animation: blink-once 0.1s linear;
+  background-color: red;
 }
 
-.card {
-  padding: 2em;
+.grid.grey {
+  background-color: #cccccc; /* Grey for incorrect letters */
 }
 
-.read-the-docs {
-  color: #888;
+.grid.yellow {
+  background-color: #ffeb3b; /* Yellow for letters in the word but in wrong position */
 }
+
+.grid.green {
+  background-color: #4caf50; /* Green for correct letters in correct position */
+}
+
+
+/* Keyboard styles */
+
+.key-row {
+  display: flex;
+  justify-content: center;
+  margin: 5px 0;
+}
+
+
+.key {
+  padding: 15px 15px;
+  margin: 2px;
+  border: none;
+  background-color: #eeecec;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+
+.key.grey {
+  background-color: #cccccc; /* Grey for incorrect letters */
+}
+
+.key.yellow {
+  background-color: #ffeb3b; /* Yellow for letters in the word but in wrong position */
+}
+
+.key.green {
+  background-color: #4caf50; /* Green for correct letters in correct position */
+}
+
+.key:hover {
+  background-color: #ccc;
+}
+
+.enter-key, .cancel-key {
+  flex-grow: 0.2;
+  background-color: #111;
+  color: white;
+}
+
+/* Add specific styles for different key types if needed */

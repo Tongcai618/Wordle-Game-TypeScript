@@ -1,7 +1,7 @@
 // src/apis/http.ts
 import axios from "axios";
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://2e3f359c6e3a.ngrok-free.app";
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api";
 
 const http = axios.create({
   baseURL: BASE_URL,
@@ -10,7 +10,7 @@ const http = axios.create({
   },
 });
 
-// Add JWT token if exists
+// Automatically attach token from localStorage
 http.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
   if (token) {
