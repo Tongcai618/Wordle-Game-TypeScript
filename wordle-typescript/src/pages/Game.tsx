@@ -6,14 +6,7 @@ import styles from "./Game.module.css";
 import { Header } from "../components/Header";
 import { useGame } from "../contexts/GameContext";
 import type { GuessResult } from "../types/game";
-
-
-const COLOR_PRIORITY: Record<string, number> = {
-    grey: 0,
-    yellow: 1,
-    green: 2,
-};
-
+import { COLOR_PRIORITY, mapFeedbackToColors } from "../utils/keyboardColors";
 
 
 // Props Interfaces
@@ -109,7 +102,6 @@ const Keyboard: React.FC<KeyboardProps> = ({ onPlay, handleCancel, handleEnter, 
             {keys.map((letter) => {
                 const upperLetter = letter.toUpperCase();
                 const color = colors[upperLetter] ?? null;
-                console.log("Key:", upperLetter, "Color:", color);
                 return (<Key key={letter}
                     letter={letter}
                     onKeyClick={() => handleKeyClick(letter)}
@@ -146,8 +138,14 @@ export const Game: React.FC = () => {
 
     useEffect(() => {
         if (!gameId) startGame();
-        console.log("gameid " + gameId)
+        console.log("Game Started")
     }, []);
+
+    useEffect(() => {
+        if (game) {
+            console.log("Game ID changed:", game.id);
+        }
+    }, [game]);
 
     const handleKey = (letter: string) => {
         if (currentWord.length >= 5) return;
@@ -173,17 +171,14 @@ export const Game: React.FC = () => {
     ): Record<string, string | null> => {
         const updated: Record<string, string | null> = { ...prev };
 
-        for (const rawLetter in next) {
-            const letter = rawLetter.toUpperCase(); // Normalize key to uppercase
-            const newColorRaw = next[rawLetter];
-            const newColor = newColorRaw?.toLowerCase() ?? null;
+        for (const letter in next) {
+            const newColor = next[letter]?.toLowerCase() ?? null;
+            const currentColor = prev[letter]?.toLowerCase() ?? null;
 
-            const currentColorRaw = prev[letter];
-            const currentColor = currentColorRaw?.toLowerCase() ?? null;
+            const newPriority = COLOR_PRIORITY[newColor!] ?? -1;
+            const currentPriority = COLOR_PRIORITY[currentColor!] ?? -1;
 
-            const newPriority = COLOR_PRIORITY[newColor ?? ""] ?? -1;
-            const currentPriority = COLOR_PRIORITY[currentColor ?? ""] ?? -1;
-
+            // Only update if the new color has higher priority
             if (newPriority > currentPriority) {
                 updated[letter] = newColor;
             }
@@ -191,9 +186,6 @@ export const Game: React.FC = () => {
 
         return updated;
     };
-
-
-
 
     const handleEnter = async () => {
         if (currentWord.length !== 5) {
@@ -216,9 +208,8 @@ export const Game: React.FC = () => {
                 };
                 setHistory(newHistory);
 
-                // Update keyboard colors
-                setColors(prev => mergeKeyboardColors(prev, res.keyboardColors));
-
+                // Update the keyboard colors given the guess and feedback
+                setColors(prev => mergeKeyboardColors(prev, mapFeedbackToColors(res.guess, res.feedback)));
                 // Clear the current word for the next input
                 setCurrentWord("");
             }
@@ -247,9 +238,15 @@ export const Game: React.FC = () => {
         setHistory(newHistory);
     };
 
+    // Reset the game
+    const resetGame = async () => {
+        await refreshGame()
+        // Clear all frontend state
+        setHistory(Array(6).fill({ guess: "", feedback: [] }));
+        setCurrentWord("");
+        setColors({});
 
-    const resetGame = () => {
-        // Placeholder logic
+        console.log("Refreshed the game.")
     };
 
     return (
