@@ -1,6 +1,6 @@
 // src/pages/Profile.tsx
 import React, { useEffect, useState } from "react";
-import Header from "../components/Header";
+import Header from "../components/Header/Header";
 import styles from "./Profile.module.css";
 import { getMe } from "../apis/user";
 import type { UserProfile } from "../types/user";

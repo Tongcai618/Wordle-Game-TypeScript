@@ -1,7 +1,7 @@
 import React from "react";
-import wordleLogo from "../assets/wordle-icon.png";
+import wordleLogo from "../../assets/wordle-icon.png";
 import styles from "./Header.module.css";
-import { useToken } from "../contexts/TokenContext";
+import { useToken } from "../../contexts/TokenContext";
 
 export const Header: React.FC = () => {
     const { token, isAuthenticated } = useToken();

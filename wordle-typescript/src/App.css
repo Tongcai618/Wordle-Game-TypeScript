@@ -1,16 +1,21 @@
-#root {
+html, body, #root {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4; /* <-- page background */
+  color: #333;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-}
-
-html, body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4; /* <-- this is your page background */
-  color: #333;
-  text-align: center;
-}
+  height: 100%;
+  margin: 0;
+} */
 
 
 .logo {

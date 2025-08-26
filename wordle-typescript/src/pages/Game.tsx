@@ -1,128 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { FaBackspace } from "react-icons/fa";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSyncAlt } from "@fortawesome/free-solid-svg-icons";
 import styles from "./Game.module.css";
-import { Header } from "../components/Header";
+import { Header } from "../components/Header/Header";
 import { useGame } from "../contexts/GameContext";
 import type { GuessResult } from "../types/game";
-import { COLOR_PRIORITY, mapFeedbackToColors } from "../utils/keyboardColors";
+import { mapFeedbackToColors, mergeKeyboardColors } from "../utils/keyboardColors";
+import { Board } from "../components/Board/Board";
+import { Keyboard } from "../components/Keyboard/Keyboard";
 
-
-// Props Interfaces
-interface GridProps {
-    value: string | null;
-    color: string | null;
-}
-
-interface KeyProps {
-    letter: string;
-    onKeyClick: () => void;
-    color: string | null;
-}
-
-interface EnterKeyProps {
-    onEnterClick: () => void;
-}
-
-interface CancelKeyProps {
-    onCancelClick: () => void;
-}
-
-interface BoardProps {
-    history: GuessResult[];
-}
-
-interface KeyboardProps {
-    onPlay: (letter: string) => void;
-    handleCancel: () => void;
-    handleEnter: () => void;
-    colors: Record<string, string | null>;
-}
-
-// Components
-const Grid: React.FC<GridProps> = ({ value, color }) => {
-    const gridClass = `${styles.grid} ${color ? styles[color] : ""}`;
-    return <div className={gridClass}>{value}</div>;
-};
-
-const Key: React.FC<KeyProps> = ({ letter, onKeyClick, color }) => {
-    const keyClass = `${styles.key} ${color ? styles[color] : ""}`;
-    return (
-        <button className={keyClass} onClick={onKeyClick}>
-            {letter}
-        </button>
-    );
-};
-
-const EnterKey: React.FC<EnterKeyProps> = ({ onEnterClick }) => (
-    <button className={`${styles.key} ${styles["enter-key"]}`} onClick={onEnterClick}>
-        ✓
-    </button>
-);
-
-const CancelKey: React.FC<CancelKeyProps> = ({ onCancelClick }) => (
-    <button className={`${styles.key} ${styles["cancel-key"]}`} onClick={onCancelClick}>
-        <FaBackspace />
-    </button>
-);
-
-const Board: React.FC<BoardProps> = ({ history }) => {
-    const rows = [];
-
-    for (let i = 0; i < 6; i++) {
-        const guessEntry = history[i];
-        const guess = guessEntry?.guess ?? "";
-        const feedback = guessEntry?.feedback ?? [];
-
-        const row = [];
-
-        for (let j = 0; j < 5; j++) {
-            const letter = guess[j] ?? null;
-            const color = feedback[j]?.toLowerCase() ?? null;
-            row.push(<Grid key={j} value={letter} color={color} />);
-        }
-
-        rows.push(
-            <div key={i} className={styles["board-row"]}>
-                {row}
-            </div>
-        );
-    }
-
-    return <>{rows}</>;
-};
-
-
-const Keyboard: React.FC<KeyboardProps> = ({ onPlay, handleCancel, handleEnter, colors }) => {
-    const handleKeyClick = (letter: string) => onPlay(letter);
-
-    const renderKeyRow = (keys: string[]) => (
-        <div className={styles["key-row"]}>
-            {keys.map((letter) => {
-                const upperLetter = letter.toUpperCase();
-                const color = colors[upperLetter] ?? null;
-                return (<Key key={letter}
-                    letter={letter}
-                    onKeyClick={() => handleKeyClick(letter)}
-                    color={color}
-                />)
-            })}
-        </div>
-    );
-
-    return (
-        <>
-            {renderKeyRow(["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"])}
-            {renderKeyRow(["A", "S", "D", "F", "G", "H", "J", "K", "L"])}
-            <div className={styles["key-row"]}>
-                <EnterKey onEnterClick={handleEnter} />
-                {renderKeyRow(["Z", "X", "C", "V", "B", "N", "M"])}
-                <CancelKey onCancelClick={handleCancel} />
-            </div>
-        </>
-    );
-};
 
 // Main Game Component
 export const Game: React.FC = () => {
@@ -167,27 +53,6 @@ export const Game: React.FC = () => {
         setHistory(newHistory);
     };
 
-    const mergeKeyboardColors = (
-        prev: Record<string, string | null>,
-        next: Record<string, string | null>
-    ): Record<string, string | null> => {
-        const updated: Record<string, string | null> = { ...prev };
-
-        for (const letter in next) {
-            const newColor = next[letter]?.toLowerCase() ?? null;
-            const currentColor = prev[letter]?.toLowerCase() ?? null;
-
-            const newPriority = COLOR_PRIORITY[newColor!] ?? -1;
-            const currentPriority = COLOR_PRIORITY[currentColor!] ?? -1;
-
-            // Only update if the new color has higher priority
-            if (newPriority > currentPriority) {
-                updated[letter] = newColor;
-            }
-        }
-
-        return updated;
-    };
 
     const handleEnter = async () => {
         if (currentWord.length !== 5) {

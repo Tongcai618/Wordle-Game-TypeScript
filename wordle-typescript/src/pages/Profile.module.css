@@ -1,8 +1,8 @@
 /* src/pages/Profile.module.css */
 .page {
-    max-width: 860px;
+    max-width: calc(100vh - 64px);
     margin: 24px auto;
-    padding: 24px;
+    padding: 24px 16px;
   }
   
   .headerRow {
