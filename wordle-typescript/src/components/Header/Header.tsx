@@ -1,5 +1,5 @@
 import React from "react";
-import wordleLogo from "../../assets/wordle-icon.png";
+import wordleLogo from "../../../public/wordle-icon.png";
 import styles from "./Header.module.css";
 import { useToken } from "../../contexts/TokenContext";
 
