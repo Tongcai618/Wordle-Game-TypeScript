@@ -25,7 +25,21 @@ export const TokenProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setToken(null);
   };
 
-  const isAuthenticated = !!token;
+  const isTokenExpired = (): boolean => {
+    if (!token) return true;
+
+    try {
+      const payload = JSON.parse(atob(token.split(".")[1]));
+      if (!payload.exp) return true;
+
+      const currentTime = Math.floor(Date.now() / 1000);
+      return payload.exp < currentTime;
+    } catch (e) {
+      return true; // Invalid token format
+    }
+  };
+
+  const isAuthenticated = !!token && !isTokenExpired();
 
   return (
     <TokenContext.Provider value={{ token, isAuthenticated, storeToken, clearToken }}>
