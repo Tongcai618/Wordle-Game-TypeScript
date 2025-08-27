@@ -23,6 +23,12 @@
     text-decoration: underline;
 }
 
+.gameTitle {
+    margin-left: 320px;
+    font-weight: bold;
+    color: #333;
+}
+
 .username {
     margin-left: 20px;
     font-weight: bold;

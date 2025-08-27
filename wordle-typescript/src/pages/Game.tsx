@@ -28,12 +28,6 @@ export const Game: React.FC = () => {
         console.log("Game Started")
     }, []);
 
-    useEffect(() => {
-        if (game) {
-            console.log("Game ID changed:", game.id);
-        }
-    }, [game]);
-
     const handleKey = (letter: string) => {
         if (currentWord.length >= 5) return;
 
@@ -111,13 +105,13 @@ export const Game: React.FC = () => {
     const handleModeClick = async (newLevel: "SIMPLE" | "NORMAL") => {
         setLevel(newLevel);
         await refreshGame(newLevel);
-          // Clear all frontend state
-          setHistory(Array(6).fill({ guess: "", feedback: [] }));
-          setCurrentWord("");
-          setColors({});
-          setToastMsg(null);
-  
-          console.log("Refreshed the game.")
+        // Clear all frontend state
+        setHistory(Array(6).fill({ guess: "", feedback: [] }));
+        setCurrentWord("");
+        setColors({});
+        setToastMsg(null);
+
+        console.log("Refreshed the game.")
     }
 
     // Listen to physical keyboard to input
@@ -150,7 +144,14 @@ export const Game: React.FC = () => {
                     <div className={styles["game-board"]}>
                         <Board history={history} />
                         <div className={styles.controls}>
-                            <button className={styles.refresh} onClick={resetGame}>
+                            <button
+                                type="button"
+                                className={styles.refresh}
+                                onClick={(e) => {
+                                    resetGame();
+                                    (e.currentTarget as HTMLButtonElement).blur(); // remove focus
+                                }}
+                            >
                                 <FontAwesomeIcon icon={faSyncAlt} />
                             </button>
                             <ModeButton

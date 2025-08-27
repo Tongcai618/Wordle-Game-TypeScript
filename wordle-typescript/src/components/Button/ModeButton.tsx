@@ -18,7 +18,12 @@ export const ModeButton: React.FC<ModeButtonProps> = ({ label, mode, onClick, ac
         .join(" ");
 
     return (
-        <button className={classNames} onClick={() => onClick(mode)}>
+        <button
+            className={classNames}
+            onClick={(e) => {
+                onClick(mode);
+                (e.currentTarget as HTMLButtonElement).blur(); // remove focus
+            }}>
             {label}
         </button>
     );

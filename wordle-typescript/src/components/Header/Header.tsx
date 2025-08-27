@@ -21,7 +21,7 @@ export const Header: React.FC = () => {
     return (
         <header className={styles.header}>
             <img src={wordleLogo} alt="Wordle Logo" className={styles.logo} />
-            <a href="/game" className={styles.username}> Wordle Game</a>
+            <a href="/game" className={styles.gameTitle}> Wordle Game</a>
             <nav className={styles.navigation}>
                 <a href="/about">About</a>
                 <a href="/contact">Contact</a>
