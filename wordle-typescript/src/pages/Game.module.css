@@ -88,11 +88,31 @@
 .cancel-key {
     width: 60px;
 }
+.controls {
+    display: flex;
+    justify-content: center; /* center row under the board */
+    gap: 12px;              /* space between buttons */
+    margin-top: 10px;
+  }
 
 .refresh {
-    margin-top: 20px;
-    background-color: #eeecec;
-    color: black;
+  background-color: #eeecec;
+  color: black;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 8px 16px;     /* 🔑 make button bigger */
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;         /* center icon inside */
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;       /* optional: keeps consistent size */
+  height: 40px;          /* match your mode buttons */
+  transition: background 0.2s ease;
+}
+
+.refresh:hover {
+  background-color: #ddd;
 }
 
 /* Game.module.css */

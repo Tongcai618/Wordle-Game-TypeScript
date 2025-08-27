@@ -20,11 +20,10 @@ export interface GuessOutcome {
   finishedAt?: string;
 }
 
-export interface Game {
+export interface GameDTO {
   id: string;
   ownerEmail: string;
-  solution: string;
-  maxTries: number;    // usually 6
+  maxTries: number; 
   tries: number;
   finished: boolean;
   won: boolean;

@@ -1,0 +1,28 @@
+/* default button look */
+.modeButton {
+    background-color: #eee;
+    border: 1px solid #ccc;
+    padding: 8px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.2s ease;
+  }
+  
+  .modeButton:hover {
+    background-color: #ddd;
+  }
+  
+  /* active styles per mode */
+  .activeSimple {
+    background-color: #4caf50; /* green */
+    color: white;
+    border-color: #4caf50;
+  }
+  
+  .activeNormal {
+    background-color: #c9b458; /* Wordle yellow */
+    color: white;
+    border-color: #c9b458;
+  }
+  

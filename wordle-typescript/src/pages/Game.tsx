@@ -10,6 +10,7 @@ import { Board } from "../components/Board/Board";
 import { Keyboard } from "../components/Keyboard/Keyboard";
 import { usePhysicalKeyboard } from "../hooks/usePhysicalKeyboard";
 import { Toast } from "../components/Toast/Toast";
+import { ModeButton } from "../components/Button/ModeButton";
 
 
 // Main Game Component
@@ -19,7 +20,7 @@ export const Game: React.FC = () => {
     );
     const [currentWord, setCurrentWord] = useState("");
     const [colors, setColors] = useState<Record<string, string | null>>({});
-    const { gameId, game, startGame, refreshGame, submitGuess } = useGame();
+    const { gameId, game, startGame, refreshGame, submitGuess, setLevel, level } = useGame();
     const [toastMsg, setToastMsg] = useState<string | null>(null);
 
     useEffect(() => {
@@ -107,6 +108,18 @@ export const Game: React.FC = () => {
         setHistory(newHistory);
     };
 
+    const handleModeClick = async (newLevel: "SIMPLE" | "NORMAL") => {
+        setLevel(newLevel);
+        await refreshGame(newLevel);
+          // Clear all frontend state
+          setHistory(Array(6).fill({ guess: "", feedback: [] }));
+          setCurrentWord("");
+          setColors({});
+          setToastMsg(null);
+  
+          console.log("Refreshed the game.")
+    }
+
     // Listen to physical keyboard to input
     usePhysicalKeyboard({
         onLetter: handleKey,
@@ -136,13 +149,30 @@ export const Game: React.FC = () => {
                 <div className={styles.panel}>
                     <div className={styles["game-board"]}>
                         <Board history={history} />
-                        <button className={styles.refresh} onClick={resetGame}>
-                            <FontAwesomeIcon icon={faSyncAlt} />
-                        </button>
+                        <div className={styles.controls}>
+                            <button className={styles.refresh} onClick={resetGame}>
+                                <FontAwesomeIcon icon={faSyncAlt} />
+                            </button>
+                            <ModeButton
+                                label="Simple"
+                                mode="SIMPLE"
+                                onClick={handleModeClick}
+                                active={level === "SIMPLE"}
+                            />
+                            <ModeButton
+                                label="Normal"
+                                mode="NORMAL"
+                                onClick={handleModeClick}
+                                active={level === "NORMAL"}
+                            />
+                        </div>
                     </div>
+
+
                     <div className={styles["game-keyboard"]}>
                         <Keyboard onPlay={handleKey} handleCancel={handleCancel} handleEnter={handleEnter} colors={colors} />
                     </div>
+
                 </div>
 
                 {/*The Toast message when the answer is correct*/}
