@@ -28,4 +28,5 @@ export interface GameDTO {
   finished: boolean;
   won: boolean;
   history: GuessResult[];
+  finishedAt: string; 
 }

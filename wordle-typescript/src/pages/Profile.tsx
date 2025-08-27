@@ -2,14 +2,22 @@
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header/Header";
 import styles from "./Profile.module.css";
-import { getMe } from "../apis/user";
+import { getMe, getMyGameActivities } from "../apis/user";
 import type { UserProfile } from "../types/user";
 import { useToken } from "../contexts/TokenContext";
 import { useNavigate } from "react-router-dom";
+import type { GameDTO } from "../types/game";
+import { useActivityMap } from "../hooks/useActivityMap";
+import GameActivityHeatmap from "../components/Heatmap/GameActivityHeatMap";
+import { formatDate } from "../utils/date";
+
 
 const Profile: React.FC = () => {
   const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [myGameActivities, setMyGameActivites] = useState<GameDTO[] | null>(null);
+  const [days, setDays] = useState<number>(7);
   const [loading, setLoading] = useState(true);
+  const [activityLoading, setActivityLoading] = useState(true);
   const [err, setErr] = useState<string | null>(null);
   const { clearToken, isAuthenticated } = useToken();
   const navigate = useNavigate();
@@ -22,12 +30,31 @@ const Profile: React.FC = () => {
         console.log(me.email);
         setProfile(me);
       } catch (e: any) {
-        setErr(e?.response?.data?.message || "Failed to load profile.");
+        setErr(e?.response?.data?.message || "Failed to load my profile.");
       } finally {
         setLoading(false);
       }
     })();
   }, []);
+
+  // Fetch the game activites from the game history
+  useEffect(() => {
+    const fetchActivities = async () => {
+      try {
+        setActivityLoading(true);
+        const myGameActivities = await getMyGameActivities(days);
+        console.log(myGameActivities);
+        setMyGameActivites(myGameActivities);
+      } catch (e: any) {
+        setErr(e?.response?.data?.message || "Failed to load my game activities.");
+      } finally {
+        setActivityLoading(false);
+      }
+    };
+
+    fetchActivities();
+  }, [days]);
+
 
   const initials = (profile?.username || profile?.email || "?")
     .split(/[\s@.]+/)
@@ -51,6 +78,10 @@ const Profile: React.FC = () => {
       </>
     );
   }
+  // The activity map to generate the heatmap
+  const activityMap = useActivityMap(myGameActivities);
+
+
 
   return (
     <>
@@ -67,31 +98,45 @@ const Profile: React.FC = () => {
                 <div className={styles.name}>{profile.username || "Unnamed Player"}</div>
                 <div className={styles.meta}>
                   {profile.email} • Joined{" "}
-                  {new Date(profile.createdAt).toLocaleDateString(undefined, {
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric",
-                  })}
+                  {formatDate(profile.createdAt)}
                 </div>
               </div>
             </section>
 
             <section className={styles.grid}>
               <div className={styles.card}>
-                <div className={styles.label}>Games Played</div>
-                <div className={styles.value}>
-                  {profile.userStats ? profile.userStats.wins /* temp until you add more */ : 0}
+                <div className={styles.label}>🏆 Wins</div>
+                <div className={styles.value}>{profile.userStats?.wins ?? 0}</div>
+                <div className={styles.winsSubtitle}>
+                  since {formatDate(profile.createdAt)}
                 </div>
               </div>
 
               <div className={styles.card}>
-                <div className={styles.label}>Wins</div>
-                <div className={styles.value}>{profile.userStats?.wins ?? 0}</div>
+                <div className={styles.label}>Game Activity</div>
+                <div className={styles.value}>Last {days} Days</div>
+                {/* Buttons to toggle day range */}
+                {!activityLoading && (
+                  <div className={styles.heatmapContainer}>
+                    <div className={styles.buttonGroup}>
+                      {[7, 30, 180].map((d) => (
+                        <button
+                          key={d}
+                          onClick={() => setDays(d)}
+                          className={days === d ? styles.activeButton : styles.inactiveButton}
+                        >
+                          {d} Days
+                        </button>
+                      ))}
+                    </div>
+
+                    <GameActivityHeatmap activityMap={activityMap} days={days} />
+                  </div>
+                )}
+
               </div>
 
-              {/* Add more when backend provides them */}
-              {/* <div className={styles.card}><div className={styles.label}>Win Rate</div><div className={styles.value}>72%</div></div> */}
-              {/* <div className={styles.card}><div className={styles.label}>Current Streak</div><div className={styles.value}>3</div></div> */}
+
             </section>
 
             <section className={styles.actions}>
