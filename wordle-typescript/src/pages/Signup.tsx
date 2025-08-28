@@ -6,7 +6,7 @@ import { signup } from "../apis/auth";
 import { useToken } from "../contexts/TokenContext";
 
 export default function Signup() {
-    const {storeToken} = useToken();
+    const { storeToken } = useToken();
     const [username, setUsername] = useState(""); // 👈 new
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -44,8 +44,17 @@ export default function Signup() {
     return (
         <div className={styles.pageContainer}>
             <div className={styles.leftPane}>
-                <h1>Join Us 🚀</h1>
-                <p>Create your account and start exploring our platform today.</p>
+                <h1>
+                    <span className={styles.letterGreen}>W</span>
+                    <span className={styles.letterYellow}>O</span>
+                    <span className={styles.letterGray}>R</span>
+                    <span className={styles.letterGreen}>D</span>
+                    <span className={styles.letterYellow}>L</span>
+                    <span className={styles.letterGray}>E</span>
+                </h1>
+
+                <p>Create your account and guess the word in 6 tries.</p>
+
             </div>
             <div className={styles.rightPane}>
                 <form className={styles.signupCard} onSubmit={handleSubmit}>
@@ -88,7 +97,7 @@ export default function Signup() {
                     />
 
                     <button className={styles.button} type="submit">
-                        Create Account
+                        🎯 Create Account
                     </button>
 
                     <p className={styles.footerText}>

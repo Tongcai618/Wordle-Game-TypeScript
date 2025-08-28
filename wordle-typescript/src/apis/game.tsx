@@ -36,3 +36,11 @@ export const submitGuess = async (
   );
   return response.data.Result;
 };
+
+// GET /api/wordle/games/solutions?id=...
+export const getGameSolution = async(id: string): Promise<String> => {
+  const response = await http.get<{solution: String}>("/wordle/games/solution", {
+    params: {id},
+  })
+  return response.data.solution;
+}

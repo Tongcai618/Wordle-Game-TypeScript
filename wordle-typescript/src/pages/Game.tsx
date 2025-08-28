@@ -11,6 +11,7 @@ import { Keyboard } from "../components/Keyboard/Keyboard";
 import { usePhysicalKeyboard } from "../hooks/usePhysicalKeyboard";
 import { Toast } from "../components/Toast/Toast";
 import { ModeButton } from "../components/Button/ModeButton";
+import { getGameSolution } from "../apis/game";
 
 
 // Main Game Component
@@ -76,6 +77,10 @@ export const Game: React.FC = () => {
                 // if the answer is correct
                 if (res.correct) {
                     setToastMsg(`🎉 You solved it: ${res.guess}!`);
+                }
+                else if (res.finished) {
+                    const solution = await getGameSolution(res.gameId);
+                    setToastMsg(`🤯 The word was ${solution.toUpperCase()}`)
                 }
             }
         } catch (err) {
