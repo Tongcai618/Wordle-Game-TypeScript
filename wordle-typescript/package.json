@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://Tongcai618.github.io/wordle/",
+  "homepage": "https://tongcai618.github.io/Wordle-Game-TypeScript/",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
