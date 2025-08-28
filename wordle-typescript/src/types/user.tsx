@@ -1,6 +1,7 @@
 // src/types/user.ts
 export interface UserStats {
-    wins: number;
+    simpleWins: number;
+    normalWins: number;
 }
 
 export interface UserProfile {

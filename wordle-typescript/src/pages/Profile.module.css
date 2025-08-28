@@ -1,4 +1,3 @@
-/* src/pages/Profile.module.css */
 .page {
   max-width: calc(100vh - 64px);
   margin: 24px auto;
@@ -9,24 +8,15 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  margin: 0 0 20px;
-}
-
-.heatmapContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* center horizontally */
-  justify-content: center;
-  padding: 1rem 0;
+  margin-bottom: 20px;
 }
 
 .avatar {
   width: 72px;
   height: 72px;
-  border-radius: 50%;
   display: grid;
   place-items: center;
+  border-radius: 50%;
   background: #427070;
   color: #fff;
   font-weight: 800;
@@ -45,8 +35,8 @@
 }
 
 .meta {
-  color: #666;
   font-size: 14px;
+  color: #666;
 }
 
 .grid {
@@ -56,17 +46,19 @@
 }
 
 .card {
-  background: #fff;
-  border: 1px solid #ececec;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  background: white;
   border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, .04);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .label {
-  color: #666;
-  font-size: 14px;
-  margin-bottom: 6px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
 }
 
 .value {
@@ -74,18 +66,84 @@
   font-weight: 700;
 }
 
+/* Wins Card Styling */
+.winsRow {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+  margin-bottom: 0.75rem;
+}
+
+.winType {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.winLabel {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.winCount {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.winsSubtitle {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+/* Activity Heatmap + Buttons */
+.heatmapContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 8px;
+  margin: 8px 0;
+}
+
+.activeButton,
+.inactiveButton {
+  padding: 4px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.activeButton {
+  background-color: #239a3b;
+  color: white;
+}
+
+.inactiveButton {
+  background-color: #ebedf0;
+  color: black;
+}
+
+/* Actions Section */
 .actions {
   display: flex;
+  justify-content: center;
   gap: 12px;
   margin-top: 20px;
-  justify-content: center;
 }
 
 .primary,
 .secondary {
   padding: 10px 14px;
-  border-radius: 10px;
   border: none;
+  border-radius: 10px;
   cursor: pointer;
 }
 
@@ -99,40 +157,11 @@
   color: #111;
 }
 
+/* Error Message */
 .error {
-  color: #b00020;
-  background: #ffe9ec;
-  border: 1px solid #ffd0d6;
   padding: 12px 14px;
   border-radius: 10px;
-}
-
-.buttonGroup {
-  display: flex;
-  gap: 8px;
-  margin: 8px 0;
-}
-
-.activeButton {
-  padding: 4px 10px;
-  background-color: #239a3b;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.inactiveButton {
-  padding: 4px 10px;
-  background-color: #ebedf0;
-  color: black;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.winsSubtitle {
-  font-size: 0.9rem;
-  color: #666;
+  border: 1px solid #ffd0d6;
+  background: #ffe9ec;
+  color: #b00020;
 }

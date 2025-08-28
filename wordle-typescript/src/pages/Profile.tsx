@@ -106,7 +106,16 @@ const Profile: React.FC = () => {
             <section className={styles.grid}>
               <div className={styles.card}>
                 <div className={styles.label}>🏆 Wins</div>
-                <div className={styles.value}>{profile.userStats?.wins ?? 0}</div>
+                <div className={styles.winsRow}>
+                  <div className={styles.winType}>
+                    <div className={styles.winLabel}>Simple</div>
+                    <div className={styles.winCount}>{profile.userStats?.simpleWins ?? 0}</div>
+                  </div>
+                  <div className={styles.winType}>
+                    <div className={styles.winLabel}>Normal</div>
+                    <div className={styles.winCount}>{profile.userStats?.normalWins ?? 0}</div>
+                  </div>
+                </div>
                 <div className={styles.winsSubtitle}>
                   since {formatDate(profile.createdAt)}
                 </div>
