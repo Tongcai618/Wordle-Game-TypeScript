@@ -9,6 +9,7 @@ import './App.css';
 import About from "./pages/About";
 import Profile from "./pages/Profile";
 import Contact from "./pages/Contact";
+import Leaderboard from "./pages/Leaderboard";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/me"element={<Profile />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </GameProvider>

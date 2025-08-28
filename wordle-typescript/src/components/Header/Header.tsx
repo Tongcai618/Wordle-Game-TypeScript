@@ -25,6 +25,7 @@ export const Header: React.FC = () => {
             <nav className={styles.navigation}>
                 <a href="/about">About</a>
                 <a href="/contact">Contact</a>
+                <a href="/leaderboard">Leaderboard</a>
                 {isAuthenticated && username ? (
                     <a href="/me" className={styles.username}>
                         {username}
