@@ -30,8 +30,8 @@ export default function About() {
 
       <h2>Credits</h2>
       <p>Created by Tong Cai © 2025</p>
-      <p><a href="https://github.com/Tongcai618/Wordle-Game-TypeScript" target="_blank" rel="noreferrer">View on GitHub</a></p>
-
+      <p><a href="https://github.com/Tongcai618/Wordle-Game-TypeScript" target="_blank" rel="noreferrer">View Frontend Code on GitHub</a></p>
+      <p><a href="https://github.com/Tongcai618/Wordle-Game-Backend" target="_blank" rel="noreferrer">View Backend Code on GitHub</a></p>
       <Link to="/" className={styles.backButton}>← Back to Game</Link>
     </div>
     </div>
