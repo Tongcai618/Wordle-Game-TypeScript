@@ -2,17 +2,16 @@ import React from "react";
 import wordleLogo from "../../../public/wordle-icon.png";
 import styles from "./Header.module.css";
 import { useToken } from "../../contexts/TokenContext";
+import { Link } from "react-router-dom";
 
 export const Header: React.FC = () => {
     const { token, isAuthenticated } = useToken();
 
-    // For demo: extract username from token if it's a JWT
-    // (if you already store username separately in context, just use that)
     let username: string | null = null;
     if (token) {
         try {
-            const payload = JSON.parse(atob(token.split(".")[1])); // decode JWT payload
-            username = payload?.sub || payload?.email || null; // adjust based on the backend
+            const payload = JSON.parse(atob(token.split(".")[1])); 
+            username = payload?.sub || payload?.email || null; 
         } catch {
             username = null;
         }
@@ -21,17 +20,19 @@ export const Header: React.FC = () => {
     return (
         <header className={styles.header}>
             <img src={wordleLogo} alt="Wordle Logo" className={styles.logo} />
-            <a href="/game" className={styles.gameTitle}> Wordle Game</a>
+            
+            <Link to="/game" className={styles.gameTitle}>Wordle Game</Link>
+            
             <nav className={styles.navigation}>
-                <a href="/about">About</a>
-                <a href="/contact">Contact</a>
-                <a href="/leaderboard">Leaderboard</a>
+                <Link to="/about">About</Link>
+                <Link to="/contact">Contact</Link>
+                <Link to="/leaderboard">Leaderboard</Link>
                 {isAuthenticated && username ? (
-                    <a href="/me" className={styles.username}>
+                    <Link to="/me" className={styles.username}>
                         {username}
-                    </a>
+                    </Link>
                 ) : (
-                    <a href="/login">Sign in</a>
+                    <Link to="/login">Sign in</Link>
                 )}
             </nav>
         </header>
