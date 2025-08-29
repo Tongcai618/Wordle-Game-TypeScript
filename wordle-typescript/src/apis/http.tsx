@@ -1,7 +1,7 @@
 // src/apis/http.ts
 import axios from "axios";
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://18.218.12.164:8081/api";
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://wordle.tong-cai.com/api";
 
 const http = axios.create({
   baseURL: BASE_URL,
