@@ -4,6 +4,7 @@ import styles from "./Login.module.css";
 import type { LoginRequest, AuthResponse } from "../types/auth";
 import { login } from "../apis/auth";
 import { useToken } from "../contexts/TokenContext";
+import { Link } from "react-router-dom";
 
 export default function Login() {
     const { storeToken } = useToken();
@@ -67,9 +68,9 @@ export default function Login() {
                     </button>
                     <p className={styles.footerText}>
                         Don't have an account?{" "}
-                        <a href="/signup" className={styles.link}>
+                        <Link to="/signup" className={styles.link}>
                             Sign up
-                        </a>
+                        </Link>
                     </p>
                 </form>
             </div>

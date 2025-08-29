@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./Signup.module.css";
 import type { AuthResponse, SignupRequest } from "../types/auth";
 import { signup } from "../apis/auth";
@@ -102,9 +102,9 @@ export default function Signup() {
 
                     <p className={styles.footerText}>
                         Already have an account?{" "}
-                        <a href="/login" className={styles.link}>
+                        <Link to="/login" className={styles.link}>
                             Login
-                        </a>
+                        </Link>
                     </p>
                 </form>
             </div>
