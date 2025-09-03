@@ -11,6 +11,8 @@ import { useActivityMap } from "../hooks/useActivityMap";
 import GameActivityHeatmap from "../components/Heatmap/GameActivityHeatMap";
 import { formatDate } from "../utils/date";
 import Card from "../components/Ui/Card";
+import RegularButton from "../components/Button/RegularButton";
+import Page from "../components/Ui/Page";
 
 
 const Profile: React.FC = () => {
@@ -87,7 +89,7 @@ const Profile: React.FC = () => {
   return (
     <>
       <Header />
-      <main className={styles.page}>
+      <Page>
         {loading && <div className={styles.card}>Loading your profile…</div>}
         {!loading && err && <div className={styles.error}>{err}</div>}
 
@@ -123,7 +125,7 @@ const Profile: React.FC = () => {
               </Card>
 
               <Card align="center">
-                <div className={styles.label}>Game Activity</div>
+                <div className={styles.label}>🎮 Game Activity</div>
                 <div className={styles.value}>Last {days} Days</div>
                 {/* Buttons to toggle day range */}
                 {!activityLoading && (
@@ -145,21 +147,20 @@ const Profile: React.FC = () => {
                 )}
 
               </Card>
-
-
             </section>
 
             <section className={styles.actions}>
-              <button className={styles.primary} onClick={() => navigate("/game")}>
+              <RegularButton variant="primary" onClick={() => navigate("/game")}>
                 Play Now
-              </button>
-              <button className={styles.secondary} onClick={handleLogout}>
+              </RegularButton>
+
+              <RegularButton variant="secondary" onClick={handleLogout}>
                 Sign out
-              </button>
+              </RegularButton>
             </section>
           </>
         )}
-      </main>
+      </Page>
     </>
   );
 };

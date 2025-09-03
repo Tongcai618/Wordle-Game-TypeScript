@@ -1,0 +1,71 @@
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 700;
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform .06s ease, background .2s ease, box-shadow .2s ease;
+    user-select: none;
+    outline: none;
+  }
+  
+  .button:active { transform: translateY(1px); }
+  
+  .fullWidth { width: 100%; }
+  
+  /* Sizes */
+  .sm { padding: 6px 10px; font-size: .9rem; }
+  .md { padding: 10px 14px; font-size: 1rem; }
+  .lg { padding: 12px 18px; font-size: 1.05rem; }
+  
+  /* Variants */
+  .primary {
+    background: #427070;
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(66,112,112,.22);
+  }
+  .primary:hover { background: #3a6363; }
+  
+  .secondary {
+    background: #e8e8e8;
+    color: #111;
+  }
+  .secondary:hover { background: #ddd; }
+  
+  .ghost {
+    background: transparent;
+    color: #1f2937;
+    border: 1px solid #e5e7eb;
+  }
+  .ghost:hover { background: #f9fafb; }
+  
+  .danger {
+    background: #ef4444;
+    color: #fff;
+  }
+  .danger:hover { background: #dc2626; }
+  
+  /* Disabled / Loading */
+  .disabled {
+    opacity: .6;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+  
+  /* Tiny spinner for loading state */
+  .spinner {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    animation: spin .8s linear infinite;
+  }
+  
+  @keyframes spin { to { transform: rotate(360deg); } }
+  
+  .label { line-height: 1; }
+  

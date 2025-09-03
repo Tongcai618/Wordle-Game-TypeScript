@@ -7,7 +7,7 @@ export default function Contact() {
     return (
         <>
             <Header />
-            <Page align='center'>
+            <Page>
                 <Card>
                     <h1>Contact</h1>
                     <p>Feel free to reach out via email or LinkedIn:</p>

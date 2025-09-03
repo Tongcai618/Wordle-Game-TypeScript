@@ -26,7 +26,7 @@ export default function Leaderboard() {
     return (
         <>
             <Header />
-            <Page align='center'>
+            <Page>
                 <Card>
                     <h1 className={styles.pageTitle}>🏆 Daily Leaderboard</h1>
                     <LeaderboardComp rankData={rankData} />

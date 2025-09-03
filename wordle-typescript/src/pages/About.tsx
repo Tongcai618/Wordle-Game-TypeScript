@@ -1,14 +1,16 @@
 import styles from './About.module.css';
-import { Link } from 'react-router-dom';
+import RegularButton from '../components/Button/RegularButton';
 import Header from '../components/Header/Header';
 import Page from '../components/Ui/Page';
 import Card from '../components/Ui/Card';
+import { useNavigate } from "react-router-dom";
 
 export default function About() {
+  const navigate = useNavigate();
   return (
     <>
       <Header />
-      <Page align='center'>
+      <Page>
         <Card>
           <h1 className={styles.title}>About This Game</h1>
           <p className={styles.lead}>
@@ -50,8 +52,18 @@ export default function About() {
             </div>
           </section>
 
-          <Link to="/" className={styles.backButton}>← Back to Game</Link>
         </Card>
+        
+        <section className={styles.actions}>
+          <RegularButton variant="primary" onClick={() => navigate("/game")}>
+            Back to Game
+          </RegularButton>
+
+          <RegularButton variant="secondary" onClick={() => navigate("/contact")}>
+            Contact Me
+          </RegularButton>
+        </section>
+        
       </Page>
     </>
   );
