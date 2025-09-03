@@ -1,29 +1,4 @@
 /* Leaderboard.module.css */
-.pageWrapper {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 48px 16px;
-  background: #f1f2f3;
-  min-height: 100vh;
-  box-sizing: border-box;
-}
-
-.pageContainer {
-  max-width: 720px;
-  margin: 40px auto;
-  padding: 24px 24px 16px;
-  background: #ffffff;
-  /* light background */
-  border: 1px solid #e5e5e5;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  border-radius: 8px;
-  font-family: system-ui, sans-serif;
-  color: #222222;
-  /* dark text on light bg */
-  line-height: 1.6;
-}
-
 .pageTitle {
   font-size: 2rem;
   font-weight: bold;

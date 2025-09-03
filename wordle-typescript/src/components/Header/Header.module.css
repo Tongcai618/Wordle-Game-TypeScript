@@ -8,11 +8,6 @@
     font-size: 20px;
 }
 
-.logo {
-    width: 50px;
-    height: auto;
-}
-
 .navigation a {
     margin-left: 15px;
     text-decoration: none;
@@ -24,9 +19,15 @@
 }
 
 .gameTitle {
-    margin-left: 320px;
-    font-weight: bold;
+    margin-left: 10px;
+    margin-top: -30px; 
+    margin-bottom: -20px;
     color: #333;
+}
+
+.gameTitle:hover {
+    text-decoration: none;
+    /* prevent underline on hover */
 }
 
 .username {

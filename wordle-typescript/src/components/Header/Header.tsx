@@ -1,8 +1,8 @@
 import React from "react";
-import wordleLogo from "../../../public/wordle-icon.png";
 import styles from "./Header.module.css";
 import { useToken } from "../../contexts/TokenContext";
 import { Link } from "react-router-dom";
+import WordleTitle from "../Title/WordleTitle";
 
 export const Header: React.FC = () => {
     const { token, isAuthenticated } = useToken();
@@ -10,8 +10,8 @@ export const Header: React.FC = () => {
     let username: string | null = null;
     if (token) {
         try {
-            const payload = JSON.parse(atob(token.split(".")[1])); 
-            username = payload?.sub || payload?.email || null; 
+            const payload = JSON.parse(atob(token.split(".")[1]));
+            username = payload?.sub || payload?.email || null;
         } catch {
             username = null;
         }
@@ -19,22 +19,30 @@ export const Header: React.FC = () => {
 
     return (
         <header className={styles.header}>
-            <img src={wordleLogo} alt="Wordle Logo" className={styles.logo} />
-            
-            <Link to="/game" className={styles.gameTitle}>Wordle Game</Link>
-            
+
+            {/* Brand (left) */}
+            <Link to="/game" className={styles.gameTitle}>
+                <WordleTitle
+                    className={styles.title}
+                    colors={["green", "yellow", "gray", "green", "yellow", "gray"]}
+                />
+            </Link>
+
+            {/* Nav (center) */}
             <nav className={styles.navigation}>
                 <Link to="/about">About</Link>
                 <Link to="/contact">Contact</Link>
                 <Link to="/leaderboard">Leaderboard</Link>
-                {isAuthenticated && username ? (
+            </nav>
+            {/* User (right) */}
+            {isAuthenticated && username ? (
                     <Link to="/me" className={styles.username}>
                         {username}
                     </Link>
                 ) : (
                     <Link to="/login">Sign in</Link>
                 )}
-            </nav>
+
         </header>
     );
 };

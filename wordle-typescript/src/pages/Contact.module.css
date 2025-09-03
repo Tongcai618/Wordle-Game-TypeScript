@@ -1,0 +1,64 @@
+.contactLinks {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contactLinks li {
+  margin-bottom: 12px;
+  font-size: 1rem;
+}
+
+.contactLinks a {
+  color: #1a73e8;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.contactLinks a:hover {
+  text-decoration: underline;
+}
+
+/* Optional: form styles if you add a form later */
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contactForm label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  color: #222;
+}
+
+.contactForm input,
+.contactForm textarea {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-top: 4px;
+}
+
+.contactForm textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.contactForm button {
+  align-self: flex-start;
+  padding: 10px 24px;
+  background-color: #6aaa64;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.contactForm button:hover {
+  background-color: #588d53;
+}

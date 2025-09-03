@@ -4,6 +4,7 @@ import styles from "./Signup.module.css";
 import type { AuthResponse, SignupRequest } from "../types/auth";
 import { signup } from "../apis/auth";
 import { useToken } from "../contexts/TokenContext";
+import WordleTitle from "../components/Title/WordleTitle";
 
 export default function Signup() {
     const { storeToken } = useToken();
@@ -44,15 +45,10 @@ export default function Signup() {
     return (
         <div className={styles.pageContainer}>
             <div className={styles.leftPane}>
-                <h1>
-                    <span className={styles.letterGreen}>W</span>
-                    <span className={styles.letterYellow}>O</span>
-                    <span className={styles.letterGray}>R</span>
-                    <span className={styles.letterGreen}>D</span>
-                    <span className={styles.letterYellow}>L</span>
-                    <span className={styles.letterGray}>E</span>
-                </h1>
-
+                <WordleTitle
+                    className={styles.title}
+                    colors={["green", "yellow", "gray", "green", "yellow", "gray"]}
+                />
                 <p>Create your account and guess the word in 6 tries.</p>
 
             </div>

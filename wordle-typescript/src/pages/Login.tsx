@@ -5,6 +5,7 @@ import type { LoginRequest, AuthResponse } from "../types/auth";
 import { login } from "../apis/auth";
 import { useToken } from "../contexts/TokenContext";
 import { Link } from "react-router-dom";
+import WordleTitle from "../components/Title/WordleTitle";
 
 export default function Login() {
     const { storeToken } = useToken();
@@ -34,14 +35,10 @@ export default function Login() {
     return (
         <div className={styles.pageContainer}>
             <div className={styles.leftPane}>
-                <h1>
-                    <span className={styles.letterGreen}>W</span>
-                    <span className={styles.letterYellow}>O</span>
-                    <span className={styles.letterGray}>R</span>
-                    <span className={styles.letterGreen}>D</span>
-                    <span className={styles.letterYellow}>L</span>
-                    <span className={styles.letterGray}>E</span>
-                </h1>
+                <WordleTitle
+                    className={styles.title}
+                    colors={["green", "yellow", "gray", "green", "yellow", "gray"]}
+                />
                 <p>Sign in to guess the word and track your daily progress 🎯</p>
             </div>
             <div className={styles.rightPane}>

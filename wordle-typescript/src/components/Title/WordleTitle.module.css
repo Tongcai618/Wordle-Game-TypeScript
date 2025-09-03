@@ -1,0 +1,13 @@
+.letterGreen,
+.letterYellow,
+.letterGray {
+  color: white;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  margin: 0 0.15rem;
+  font-size: 2.5rem; /* adjust as needed */
+}
+
+.letterGreen { background-color: #6aaa64; }
+.letterYellow { background-color: #c9b458; }
+.letterGray { background-color: #787c7e; }
