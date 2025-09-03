@@ -10,6 +10,7 @@ import type { GameDTO } from "../types/game";
 import { useActivityMap } from "../hooks/useActivityMap";
 import GameActivityHeatmap from "../components/Heatmap/GameActivityHeatMap";
 import { formatDate } from "../utils/date";
+import Card from "../components/Ui/Card";
 
 
 const Profile: React.FC = () => {
@@ -104,7 +105,7 @@ const Profile: React.FC = () => {
             </section>
 
             <section className={styles.grid}>
-              <div className={styles.card}>
+              <Card maxWidth={230} align="center">
                 <div className={styles.label}>🏆 Wins</div>
                 <div className={styles.winsRow}>
                   <div className={styles.winType}>
@@ -119,9 +120,9 @@ const Profile: React.FC = () => {
                 <div className={styles.winsSubtitle}>
                   since {formatDate(profile.createdAt)}
                 </div>
-              </div>
+              </Card>
 
-              <div className={styles.card}>
+              <Card align="center">
                 <div className={styles.label}>Game Activity</div>
                 <div className={styles.value}>Last {days} Days</div>
                 {/* Buttons to toggle day range */}
@@ -143,7 +144,7 @@ const Profile: React.FC = () => {
                   </div>
                 )}
 
-              </div>
+              </Card>
 
 
             </section>
