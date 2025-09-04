@@ -18,3 +18,15 @@ export const getMyGameActivities = async (days: number): Promise<GameDTO[]> => {
   console.log(data);
   return data;
 }
+
+export const getOther = async (username: string): Promise<UserProfile> => {
+  const { data } = await http.get<UserProfile>(`/users/${username}`);
+  console.log(data);
+  return data;
+}
+
+export const getOtherGameActivities = async (username: string, days: number): Promise<GameDTO[]> => {
+  const { data } = await http.get<GameDTO[]>(`/users/${username}/game-activities?${days}`);
+  console.log(data);
+  return data;
+}

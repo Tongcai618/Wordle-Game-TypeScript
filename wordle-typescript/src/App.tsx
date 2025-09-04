@@ -10,6 +10,7 @@ import About from "./pages/About";
 import Profile from "./pages/Profile";
 import Contact from "./pages/Contact";
 import Leaderboard from "./pages/Leaderboard";
+import OtherProfile from "./pages/OtherProfile";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/game" element={<Game />} />
           <Route path="/me"element={<Profile />} />
+          <Route path="/user/:username" element={<OtherProfile />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/leaderboard" element={<Leaderboard />} />

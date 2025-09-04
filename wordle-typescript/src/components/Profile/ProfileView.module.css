@@ -1,0 +1,181 @@
+.page {
+    max-width: calc(100vh - 64px);
+    margin: 24px auto;
+    padding: 24px 16px;
+}
+
+.headerRow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.avatar {
+    width: 72px;
+    height: 72px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #427070;
+    color: #fff;
+    font-weight: 800;
+    font-size: 22px;
+}
+
+.identity {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.name {
+    align-self: self-start;
+    margin-left: 20px;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.meta {
+    font-size: 14px;
+    margin-left: 20px;
+    color: #666;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.label {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.value {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+/* Wins Card Styling */
+.winsRow {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%;
+    margin-bottom: 0.75rem;
+}
+
+.winType {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.winLabel {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.winCount {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.winsSubtitle {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+/* Activity Heatmap + Buttons */
+.heatmapContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 0;
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 8px;
+    margin: 8px 0;
+}
+
+.activeButton,
+.inactiveButton {
+    padding: 4px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.activeButton {
+    background-color: #239a3b;
+    color: white;
+}
+
+.inactiveButton {
+    background-color: #ebedf0;
+    color: black;
+}
+
+/* Actions Section */
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.primary,
+.secondary {
+    padding: 10px 14px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.primary {
+    background: #427070;
+    color: #fff;
+}
+
+.secondary {
+    background: #e8e8e8;
+    color: #111;
+}
+
+.card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    /* light gray border */
+    border-radius: 12px;
+    /* rounded corners */
+    padding: 16px 20px;
+    /* space inside */
+    margin: 16px auto;
+    /* vertical spacing, centered */
+    max-width: 500px;
+    /* don’t stretch too wide */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    /* subtle shadow */
+    font-size: 0.95rem;
+    color: #374151;
+    /* dark gray text */
+    text-align: center;
+}
+
+
+/* Error Message */
+.error {
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid #ffd0d6;
+    background: #ffe9ec;
+    color: #b00020;
+}
