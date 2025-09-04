@@ -21,11 +21,16 @@ export const Game: React.FC = () => {
     );
     const [currentWord, setCurrentWord] = useState("");
     const [colors, setColors] = useState<Record<string, string | null>>({});
-    const { gameId, game, startGame, refreshGame, submitGuess, setLevel, level } = useGame();
+    const { game, startGame, refreshGame, submitGuess, setLevel, level } = useGame();
     const [toastMsg, setToastMsg] = useState<string | null>(null);
 
     useEffect(() => {
-        if (!gameId) startGame();
+        startGame();
+         // Clear all frontend state
+         setHistory(Array(6).fill({ guess: "", feedback: [] }));
+         setCurrentWord("");
+         setColors({});
+         setToastMsg(null);
         console.log("Game Started")
     }, []);
 
