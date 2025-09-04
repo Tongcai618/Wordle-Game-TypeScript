@@ -69,8 +69,10 @@ const OtherProfile: React.FC = () => {
                     setDays={setDays}
                     activityMap={activityMap}
                     activityLoading={activityLoading}
+                    onBack={() => navigate(-1)}
                     onPlay={() => navigate("/game")}
                     onLogout={() => { clearToken(); navigate("/login"); }}
+
                 />
             </Page>
         </>

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./LeaderboardComp.module.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface LeaderboardProps {
   rankData: Record<string, number>;
@@ -8,14 +8,7 @@ interface LeaderboardProps {
 
 export const LeaderboardComp: React.FC<LeaderboardProps> = ({ rankData }) => {
   const sortedScores = Object.entries(rankData).sort((a, b) => b[1] - a[1]);
-
-  // Helper to extract initials from email
-  const getInitials = (username: string) => {
-    const namePart = username.split("@")[0];
-    const pieces = namePart.split(/[.\-_]/); // split on common separators
-    const initials = pieces.map((p) => p[0]?.toUpperCase() ?? "").slice(0, 2);
-    return initials.join("");
-  };
+  const navigate = useNavigate();
 
   return (
     <>
@@ -29,19 +22,19 @@ export const LeaderboardComp: React.FC<LeaderboardProps> = ({ rankData }) => {
         </thead>
         <tbody>
           {sortedScores.map(([username, score], index) => {
-            const initials = getInitials(username);
             return (
-              <tr key={username}>
+              <tr
+                key={username}
+                className={styles.row}
+                onClick={() => navigate(`/user/${username}`)}
+              >
                 <td className={styles.rank}>{index + 1}</td>
                 <td className={styles.userCell}>
-                  <Link to={`/user/${username}`} className={styles.profileLink}>
-                    <div className={styles.avatar}>{initials}</div>
-                    <span className={styles.email}>{username}</span>
-                  </Link>
+                  <div className={styles.avatar}>{username[0]}</div>
+                  <span className={styles.username}>{username}</span>
                 </td>
                 <td className={styles.score}>{score}</td>
-              </tr>
-            );
+              </tr>)
           })}
         </tbody>
       </table>
