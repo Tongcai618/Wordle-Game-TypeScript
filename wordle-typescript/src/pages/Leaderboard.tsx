@@ -28,7 +28,7 @@ export default function Leaderboard() {
             <Header />
             <Page>
                 <Card>
-                    <h1 className={styles.pageTitle}>🏆 Daily Leaderboard</h1>
+                    <h1 className={styles.title}>🏆 Daily Leaderboard</h1>
                     <LeaderboardComp rankData={rankData} />
                 </Card>
             </Page>

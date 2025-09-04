@@ -9,7 +9,7 @@ export default function Contact() {
             <Header />
             <Page>
                 <Card>
-                    <h1>Contact</h1>
+                    <h1 className={styles.title} >Contact</h1>
                     <p>Feel free to reach out via email or LinkedIn:</p>
 
                     <ul className={styles.contactLinks}>

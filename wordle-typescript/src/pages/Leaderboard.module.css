@@ -1,9 +1,10 @@
 /* Leaderboard.module.css */
-.pageTitle {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 1.5rem;
-  color: #333;
+.title {
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+  line-height: 1.2;
+  margin: 0 0 8px;
+  color: #111827;
+  /* slate-900 */
 }
 
 

@@ -48,17 +48,15 @@
 }
 
 .avatar {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
   border-radius: 50%;
-  background: linear-gradient(135deg, #3182ce, #63b3ed); /* blue gradient */
-  color: white;
-  font-weight: 700;
-  font-size: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  background: #427070;
+  color: #fff;
+  font-weight: 800;
+  font-size: 22px;
 }
 
 .email {
