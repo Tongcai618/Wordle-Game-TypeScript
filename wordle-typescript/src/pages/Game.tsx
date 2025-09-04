@@ -26,11 +26,11 @@ export const Game: React.FC = () => {
 
     useEffect(() => {
         startGame();
-         // Clear all frontend state
-         setHistory(Array(6).fill({ guess: "", feedback: [] }));
-         setCurrentWord("");
-         setColors({});
-         setToastMsg(null);
+        // Clear all frontend state
+        setHistory(Array(6).fill({ guess: "", feedback: [] }));
+        setCurrentWord("");
+        setColors({});
+        setToastMsg(null);
         console.log("Game Started")
     }, []);
 
